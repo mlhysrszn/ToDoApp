@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/toDoFragment"
+        android:icon="@drawable/todo_icon"
+        android:title="@string/todo" />
+
+    <item
+        android:id="@+id/doneFragment"
+        android:icon="@drawable/done_icon"
+        android:title="@string/done" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile" />
+
+</menu>

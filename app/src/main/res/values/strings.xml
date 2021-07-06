@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ToDoApp</string>
+    <string name="profile">Profil</string>
+    <string name="done">Yapılmışlar</string>
+    <string name="todo">Yapılacaklar</string>
+    <string name="addButton">AddButton</string>
 </resources>
