@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutToDo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextToDo"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/alert_hint"
+            android:inputType="text"
+            android:maxLength="25"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkBoxImportant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/important"
+        app:layout_constraintBottom_toTopOf="@id/alertDoneButton"
+        app:layout_constraintStart_toStartOf="@id/inputLayoutToDo"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutToDo" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/alertDoneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/done_button"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/inputLayoutToDo"
+        app:layout_constraintTop_toBottomOf="@id/checkBoxImportant" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/alertAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/primary"
+        android:text="@string/add"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/inputLayoutToDo"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxImportant" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

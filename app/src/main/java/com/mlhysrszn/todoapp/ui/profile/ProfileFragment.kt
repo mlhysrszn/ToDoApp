@@ -1,20 +1,17 @@
 package com.mlhysrszn.todoapp.ui.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mlhysrszn.todoapp.R
+import com.mlhysrszn.todoapp.data.ToDoDAO
+import com.mlhysrszn.todoapp.data.ToDoDatabase
+import com.mlhysrszn.todoapp.databinding.ProfileFragmentBinding
 
 class ProfileFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
-    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +22,29 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+        val toDoDAO: ToDoDAO? = ToDoDatabase.getToDoDatabase(requireContext())?.toDoDao()
+        val viewModel: ProfileViewModel by viewModels { ProfileViewModelFactory(toDoDAO) }
+
+        val binding = ProfileFragmentBinding.bind(view)
+
+        viewModel.allToDoCount.observe(viewLifecycleOwner, {
+            binding.activeCount.text = it.toString()
+        })
+
+        viewModel.allDoneToDoCount.observe(viewLifecycleOwner, {
+            binding.doneCount.text = it.toString()
+        })
+
+        viewModel.allImportantToDoCount.observe(viewLifecycleOwner, {
+            binding.importantCount.text = "Önemli $it"
+        })
+
+        binding.resetButton.setOnClickListener{
+            viewModel.deleteAllToDos()
+            binding.activeCount.text = "0"
+            binding.doneCount.text = "0"
+            binding.importantCount.text = "Önemli 0"
+        }
     }
 
 }

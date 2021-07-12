@@ -11,10 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottomNavBar()
+        activateBottomNavBar()
     }
 
-    private fun bottomNavBar() {
+    private fun activateBottomNavBar() {
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottomNavBar)
 
         val navHostFragment =

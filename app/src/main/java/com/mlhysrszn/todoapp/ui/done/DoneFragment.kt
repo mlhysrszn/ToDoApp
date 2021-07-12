@@ -1,20 +1,19 @@
 package com.mlhysrszn.todoapp.ui.done
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.mlhysrszn.todoapp.R
+import com.mlhysrszn.todoapp.databinding.DoneFragmentBinding
 
 class DoneFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DoneFragment()
-    }
-
-    private lateinit var viewModel: DoneViewModel
+    private lateinit var rv: RecyclerView
+    private lateinit var adapter: DoneToDoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +24,17 @@ class DoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DoneViewModel::class.java)
-        // TODO: Use the ViewModel
+        val application = requireNotNull(this.activity).application
+        val viewModel: DoneViewModel by viewModels { DoneViewModelFactory(application) }
+        println(viewModel.doneToDoList.value)
+
+        val binding = DoneFragmentBinding.bind(view)
+        rv = binding.doneRv
+
+        viewModel.doneToDoList.observe(viewLifecycleOwner, {
+            adapter = DoneToDoAdapter(it, viewModel)
+            rv.adapter = adapter
+        })
     }
 
 }
